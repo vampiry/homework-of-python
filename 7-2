@@ -1,0 +1,78 @@
+#設定weight迴圈function
+def weight_for_aa(aa):
+	if aa == 'A':
+		return 89.09
+	elif aa == 'C':
+		return 121.16
+	elif aa == 'D':
+		return 133.10
+	elif aa == 'E':
+		return 147.13
+	elif aa == 'F':
+		return 165.19
+	elif aa == 'G':
+		return 75.07
+	elif aa == 'H':
+		return 155.16
+	elif aa == 'I':
+		return 131.18
+	elif aa == 'K':
+		return 146.19
+	elif aa == 'L':
+		return 131.18
+	elif aa == 'M':
+		return 149.21
+	elif aa == 'N':
+		return 132.12
+	elif aa == 'P':
+		return 115.13
+	elif aa == 'Q':
+		return 146.15
+	elif aa == 'R':
+		return 174.20
+	elif aa == 'S':
+		return 105.09
+	elif aa == 'T':
+		return 119.12
+	elif aa == 'V':
+		return 117.15
+	elif aa == 'W':
+		return 204.23
+	elif aa == 'Y':
+		return 181.19
+
+#輸入項
+seq = 'ASQKRPSQRHGSKYLATASTMDHARHGFLPRHRDTGILDSIGRFFGGDRGAPKNMTKDSHHPARSHGRTQDENTSVHFFKNPTTPRTPPPR'
+#seq = input('Enter your sequence: ')
+
+#切fragments
+def fragments(trypsin):
+	subseq = []
+	loc_0 = 0
+	loc_int = 0
+	for trypsin in seq:
+		if trypsin == 'R' or trypsin == 'K':
+			loc = seq[loc_int:].index(trypsin) + loc_int
+			if loc + 1 == len(seq):
+					break #最後一個字元後中斷執行
+			elif seq[loc + 1] != 'P':
+				subseq.append(seq[loc_0:loc+1])
+				loc_0 = loc + 1
+				loc_int = loc + 1
+			loc_int = loc + 1
+	subseq.append(seq[loc_0:])
+	return subseq
+	#此處有錯，我抓不到蟲
+
+peptides = fragments(seq)
+for subseq in peptides:
+	weight = 18.02
+	for aa in subseq:
+		weight += (weight_for_aa(aa) - 18.02)
+		print(f'{subseq:20}{weight:10.0f}') #排版運算結果
+
+#輸出total weight
+weight = weight_for_aa(seq[0]) #初始重量
+for aa in seq[1:]:
+		weight = weight + weight_for_aa(aa) - 18.02
+print ('The molecular weight for the entire sequence is: ', weight)
