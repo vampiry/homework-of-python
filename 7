@@ -1,0 +1,77 @@
+#設定weight迴圈function
+def weight_for_aa(aa):
+	if aa == 'A':
+		return 89.09
+	elif aa == 'C':
+		return 121.16
+	elif aa == 'D':
+		return 133.10
+	elif aa == 'E':
+		return 147.13
+	elif aa == 'F':
+		return 165.19
+	elif aa == 'G':
+		return 75.07
+	elif aa == 'H':
+		return 155.16
+	elif aa == 'I':
+		return 131.18
+	elif aa == 'K':
+		return 146.19
+	elif aa == 'L':
+		return 131.18
+	elif aa == 'M':
+		return 149.21
+	elif aa == 'N':
+		return 132.12
+	elif aa == 'P':
+		return 115.13
+	elif aa == 'Q':
+		return 146.15
+	elif aa == 'R':
+		return 174.20
+	elif aa == 'S':
+		return 105.09
+	elif aa == 'T':
+		return 119.12
+	elif aa == 'V':
+		return 117.15
+	elif aa == 'W':
+		return 204.23
+	elif aa == 'Y':
+		return 181.19
+
+#輸入項
+seq = 'ASQKRPSQRHGSKYLATASTMDHARHGFLPRHRDTGILDSIGRFFGGDRGAPKNMTKDSHHPARSHGRTQDENTSVHFFKNPTTPRTPPPR'
+#seq = input('Enter your sequence: ')
+
+#切fragments
+def fragments(trypsin):
+	for trypsin in seq:
+		if trypsin == 'R' or trypsin == 'K':
+			loc = seq.index(trypsin)
+			if seq[loc+1] != 'P':
+				return (seq[0:loc+1])
+for aa in range(len(seq)):
+	subseq = fragments(aa)
+
+subseq = fragments(aa)
+
+#print (subseq) #驗證是否切出所有片段
+#我寫不出會一直循環跑的語法耶
+
+#fragments weight
+weight = weight_for_aa(subseq[0]) #片段初始重量
+
+#計算片段total weight
+for aa in subseq[1:]:
+		weight = weight + weight_for_aa(aa) - 18.02
+
+#排版運算結果
+print(f'{subseq:20}{weight:10.0f}')
+
+#輸出total weight
+weight = weight_for_aa(seq[0]) #初始重量
+for aa in seq[1:]:
+		weight = weight + weight_for_aa(aa) - 18.02
+print ('The molecular weight for the entire sequence is: ', weight)
