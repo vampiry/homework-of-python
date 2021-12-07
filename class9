@@ -1,0 +1,11 @@
+f = open('input.fa')
+t = open('codon.txt')
+
+codon = {}
+for aa in t:
+    table_original = aa.split("=")
+    table = (table_original[1].replace(' ','').replace('\n',''))
+#    codon['Base1+Base2+Base3']='AAs'
+
+#for seq in f(0:len(seq):3):
+#    print(codon[seq])
