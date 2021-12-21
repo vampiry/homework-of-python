@@ -1,0 +1,14 @@
+#PART1 整理seqs
+
+seq = []
+input = open('/Users/vampiry/Desktop/台大博班/課程/python/homework_inputs/Homework9Inputs/OG0010449_aligned.fa')
+inputseq = input.read().strip().split(',')
+seq.append(inputseq)
+print (inputseq)
+
+newseq = []
+for ii in inputseq[loc:(len(inputseq)]:
+    if ii == '>':
+        #回報'>'位置後，再找到第一個'-'
+        #刪除'>'開始，至'-'前一個位置的字串 (replace)
+      
